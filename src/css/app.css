@@ -2,6 +2,10 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
-
+/* layout contains the structure of the page */
 @import 'layout.css';
+
+/* typography contains the font styles and sizes for the page */
+@import 'typography.css';
+
+@import 'daisyui.css';

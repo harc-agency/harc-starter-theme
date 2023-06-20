@@ -1,12 +1,12 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-import { InertiaProgress } from '@inertiajs/progress'
-import Layout from './shared/Layout.vue'
+import { createApp, h } from "vue"
+import { createInertiaApp } from "@inertiajs/inertia-vue3"
+import { InertiaProgress } from "@inertiajs/progress"
+import Layout from "./shared/Layout.vue"
 
 InertiaProgress.init()
 
 createInertiaApp({
-    resolve: (name) => {
+    resolve: name => {
         const page = require(`./Pages/${name}`).default
 
         // Use global layout for all pages, unless overridden by individual page.
@@ -18,5 +18,5 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .mount(el)
-    },
+    }
 })

@@ -2,12 +2,12 @@
 
 use BoxyBird\Inertia\Inertia;
 
+
+
 if (is_front_page()) {
-
-
     $data = [
-        // 'post' => get_post(),
-        'post' => transform_post_data(get_post()),
+        'post' => transform_get_post(),
+        'menu' => transform_wp_get_nav_menu_items('main-menu'),
         'fields' => get_fields(),
     ];
     // dd($data);
@@ -16,26 +16,43 @@ if (is_front_page()) {
 }
 
 if (is_home()) {
-    return Inertia::render('Index', [
-        'posts' => get_posts(),
-    ]);
+    $data = [
+        // 'post' => get_post(),
+        'menu' => transform_wp_get_nav_menu_items('main-menu'),
+        'posts' => get_posts(), //transform_posts_data(get_posts()),
+        'fields' => get_fields(),
+    ];
+    // dd($data);
+
+    return Inertia::render('Index', $data);
 }
 
 if (is_single()) {
-    return Inertia::render('Single', [
-        'post' => get_post(),
-        'fields' => get_fields(),
-    ]);
+
+    $data = [
+        'menu' => transform_wp_get_nav_menu_items('main-menu'),
+        'post' => transform_get_post(),
+    ];
+    // dd($data);
+
+    return Inertia::render('Single', $data);
 }
 
 if (is_page()) {
-    return Inertia::render('Page', [
-        'page' => get_post(),
-    ]);
+    $data = [
+        'menu' => transform_wp_get_nav_menu_items('main-menu'),
+        'post' => get_post(),
+    ];
+    // dd($data);
+
+    return Inertia::render('Page', $data);
 }
 
 if (is_404()) {
-    return Inertia::render('404', [
+    $data = [
         'content' => '404 - Not Found',
-    ]);
+    ];
+    // dd($data);
+
+    return Inertia::render('404', $data);
 }

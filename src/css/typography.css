@@ -1,0 +1,25 @@
+/* Jost */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap');
+
+/* Comfortaa */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Jost:wght@100&display=swap');
+
+
+body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+}
+
+h1 {
+    font-family: 'Jost', sans-serif;
+}
+
+h2 {
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/* 
+set all the text with block elements to have a margin-bottom of 1rem
+
+*/

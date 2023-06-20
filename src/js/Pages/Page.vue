@@ -1,15 +1,19 @@
 <template>
-  <section>
-    <h1>Page:</h1>
-    <h3>{{ props.page.post_title }}</h3>
-    <div v-html="props.page.post_content"></div>
-  </section>
+<section>
+    <div>
+        <h3>{{ page.props.post.post_title }}</h3>
+        <div v-html="page.props.post.post_content"></div>
+    </div>
+</section>
 </template>
 
 <script setup>
-import { usePage } from "@inertiajs/inertia-vue3";
+import { usePage } from "@inertiajs/inertia-vue3"
+import { reactive } from "vue"
 
-const { props } = usePage();
+const page = reactive(usePage())
 </script>
 
-<style></style>
+<style scoped >
+
+</style>
