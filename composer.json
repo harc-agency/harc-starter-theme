@@ -6,7 +6,16 @@
       "email": "hello@andrewrhyand.com"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Core\\": "core/"
+    }
+
+  },
+
   "require": {
-    "boxybird/inertia-wordpress": "^0.5.6"
-  }
+    "boxybird/inertia-wordpress": "^0.5.6",
+    "symfony/dotenv": "^6.3"
+   }
 }

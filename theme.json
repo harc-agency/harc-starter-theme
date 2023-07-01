@@ -1,0 +1,39 @@
+{
+    "version": 1,
+    "settings": {
+      "color": {
+        "text": "#333333",
+        "link": "#0073aa"
+      },
+      "typography": {
+        "body": {
+          "fontFamily": "Arial, sans-serif",
+          "fontSize": "16px",
+          "lineHeight": "1.6"
+        },
+        "heading": {
+          "fontFamily": "Helvetica, sans-serif",
+          "fontWeight": "bold"
+        }
+      }
+    },
+    "styles": {
+      "core/paragraph": {
+        "color": "$color-text",
+        "fontFamily": "$typography-body-fontFamily",
+        "fontSize": "$typography-body-fontSize",
+        "lineHeight": "$typography-body-lineHeight"
+      },
+      "core/button": {
+        "backgroundColor": "$color-link",
+        "color": "#ffffff",
+        "padding": "10px 20px",
+        "borderRadius": "5px"
+      }
+    },
+    "supports": {
+      "align": ["left", "center", "right"],
+      "customClassName": false
+    }
+  }
+  

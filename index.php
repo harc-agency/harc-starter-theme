@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/helpers/logs.php';
 
 use BoxyBird\Inertia\Inertia;
 
@@ -7,30 +8,63 @@ use BoxyBird\Inertia\Inertia;
 if (is_front_page()) {
     $data = [
         'post' => transform_get_post(),
-        'menu' => transform_wp_get_nav_menu_items('main-menu'),
         'fields' => get_fields(),
     ];
+
     // dd($data);
 
     return Inertia::render('Homepage', $data);
 }
 
-if (is_home()) {
+// woo commerce product page
+if (is_product()) {
+
+    $product = json_decode(wc_get_product(get_the_ID()));
+
     $data = [
-        // 'post' => get_post(),
-        'menu' => transform_wp_get_nav_menu_items('main-menu'),
-        'posts' => get_posts(), //transform_posts_data(get_posts()),
-        'fields' => get_fields(),
+        'product' => $product,
+        'wc_product' => do_shortcode('[product_page id="' . get_the_ID() . '"]'),
     ];
     // dd($data);
 
-    return Inertia::render('Index', $data);
+    return Inertia::render('Woocommerce/Product', $data);
 }
 
+// woo commerce cart
+if (is_shop()) {
+
+    $data = [
+        'products' => do_shortcode('[products]'),
+    ];
+    // dd($data);
+
+    return Inertia::render('Woocommerce/Shop', $data);
+}
+
+// woo commerce cart
+if (is_cart()) {
+    $data = [
+        'woocommerce_cart' => do_shortcode('[woocommerce_cart]'),
+    ];
+    // dd($data);
+
+    return Inertia::render('Woocommerce/Cart', $data);
+}
+
+// woo commerce checkout
+if (is_checkout()) {
+    $data = [
+        'woocommerce_checkout' => do_shortcode('[woocommerce_checkout]'),
+    ];
+    // dd($data);
+
+    return Inertia::render('Woocommerce/Checkout', $data);
+}
+
+// is_single post
 if (is_single()) {
 
     $data = [
-        'menu' => transform_wp_get_nav_menu_items('main-menu'),
         'post' => transform_get_post(),
     ];
     // dd($data);
@@ -38,21 +72,37 @@ if (is_single()) {
     return Inertia::render('Single', $data);
 }
 
+// is page
 if (is_page()) {
     $data = [
-        'menu' => transform_wp_get_nav_menu_items('main-menu'),
         'post' => get_post(),
+        'fields' => get_fields(),
     ];
     // dd($data);
 
     return Inertia::render('Page', $data);
 }
 
+// is 404
 if (is_404()) {
     $data = [
-        'content' => '404 - Not Found',
+        'code' => 404,
+        'message' => 'Page Not Found',
     ];
     // dd($data);
 
     return Inertia::render('404', $data);
+}
+
+// blog page, archive page, category page, 
+if (is_home()) {
+    $data = [
+
+        // 'post' => get_post(),
+        'posts' => get_posts(), //transform_posts_data(get_posts()),
+        'fields' => get_fields(),
+    ];
+    // dd($data);
+
+    return Inertia::render('Index', $data);
 }

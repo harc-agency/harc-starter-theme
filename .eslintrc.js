@@ -79,8 +79,11 @@ module.exports = {
         "vue/multi-word-component-names": "off",
         "vue/no-lone-template": "off",
         "vue/html-quotes": ["error", "double", { avoidEscape: true }],
-        "vue/html-indent": ["error", 4, {
+        "vue/html-indent": ["error", 2, {
+            attribute: 1,
             baseIndent: 0,
+            closeBracket: 0,
+            alignAttributesVertically: true,
             ignores: []
 
         }],
@@ -95,7 +98,10 @@ module.exports = {
             ignoreWhenEmpty: true,
             ignores: ["pre", "textarea"],
             allowEmptyLines: false
+        }],
+        "vue/no-spaces-around-equal-signs-in-attribute": ["error"],
+        "vue/no-multi-spaces": ["error", {
+            ignoreProperties: false
         }]
-
     }
 }

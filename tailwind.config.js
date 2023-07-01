@@ -1,7 +1,10 @@
 //https://stackblitz.com/edit/daisyui-vue-vite-nmbyr6/?file=src%2FApp.vue,vite.config.js,tailwind.config.js
 module.exports = {
-    content: ['./src/**/*.{vue,js,ts}'],
-    plugins: [require('daisyui')],
+    content: ["./src/**/*.{vue,js,ts}"],
+    plugins: [
+        require("@tailwindcss/container-queries"),
+        require("daisyui")
+    ],
     daisyui: {
         themes: [
             "light",
@@ -32,7 +35,7 @@ module.exports = {
             "lemonade",
             "night",
             "coffee",
-            "winter",
-        ],
-    },
-};
+            "winter"
+        ]
+    }
+}

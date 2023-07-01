@@ -20,23 +20,7 @@ if (!function_exists('transform_get_post')) {
 }
 
 
-function add_children_to_parent($menu_items, $parent_id)
-{
-    $children = [];
 
-    foreach ($menu_items as $menu_item) {
-        if ($menu_item->menu_item_parent == $parent_id) {
-            $children[] = [
-                'ID' => $menu_item->ID,
-                'title' => $menu_item->title,
-                'url' => $menu_item->url,
-                'children' => add_children_to_parent($menu_items, $menu_item->ID),
-            ];
-        }
-    }
-
-    return $children;
-}
 
 //use add_children_to_parent function to add children to the parent
 //transform wp_get_nav_menu_items
@@ -65,7 +49,26 @@ if (!function_exists('transform_wp_get_nav_menu_items')) {
                 ];
             }
         }
+        // dd($transformed_data);
 
         return $transformed_data;
     }
+}
+
+function add_children_to_parent($menu_items, $parent_id)
+{
+    $children = [];
+
+    foreach ($menu_items as $menu_item) {
+        if ($menu_item->menu_item_parent == $parent_id) {
+            $children[] = [
+                'ID' => $menu_item->ID,
+                'title' => $menu_item->title,
+                'url' => $menu_item->url,
+                'children' => add_children_to_parent($menu_items, $menu_item->ID),
+            ];
+        }
+    }
+
+    return $children;
 }
