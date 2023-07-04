@@ -80,7 +80,6 @@ if (!function_exists('transform_get_user')) {
     {
         $user = wp_get_current_user();
         unset($user->data->user_pass);
-        dd($user);
         return $user;
     }
 }
