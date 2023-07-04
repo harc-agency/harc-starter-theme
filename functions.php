@@ -43,7 +43,7 @@ add_action('init', function ($data) {
         'auth' => function () {
             if (is_user_logged_in()) {
                 return [
-                    'user' => wp_get_current_user()
+                    'user' => transform_get_user(),
                 ];
             }
         },

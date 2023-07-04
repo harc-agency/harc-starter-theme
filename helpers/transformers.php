@@ -27,6 +27,7 @@ if (!function_exists('transform_get_post')) {
 if (!function_exists('transform_wp_get_nav_menu_items')) {
     function transform_wp_get_nav_menu_items($menu_items)
     {
+
         $menu_items = wp_get_nav_menu_items($menu_items);
         // dd($menu_items);
 
@@ -71,4 +72,15 @@ function add_children_to_parent($menu_items, $parent_id)
     }
 
     return $children;
+}
+
+// transform_get_user
+if (!function_exists('transform_get_user')) {
+    function transform_get_user()
+    {
+        $user = wp_get_current_user();
+        unset($user->data->user_pass);
+        dd($user);
+        return $user;
+    }
 }
