@@ -5,11 +5,15 @@ A bare-bones example theme using Inertia with Vue, and the WordPress Inertia ada
 ### Installation
 Clone this repository into the WordPress themes directory.
 
+
+After creating the Local Project open in a shell and run the following
+
 ```bash
-cd *your-theme-name*
+wp theme install https://github.com/harc-agency/harc-starter-theme/archive/refs/heads/master.zip --activate
+
+cd wp-content/themes/harc-starter-theme/
 
 composer install
-
 npm install
 npm run dev
 ```
