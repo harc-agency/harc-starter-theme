@@ -40,7 +40,21 @@ cd ../../../
 wp menu create "main-menu"
 #  add to the main-menu "homepage"
 
-wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID ) --title="Homepage" 
+
+
+
+
+
+
+
+wp post create --post_type=page --post_title='Homepage' --post_status=publish --post_author=1 --post_category=1
+
+slug="homepage"
+homepageId=echo "<output>" | grep -oP "^\|\s+(\d+)\s+\|\s+$slug\s+\|.*$" | awk -F'|' '{print $2}'
+echo $homepageId
+# use xargs to get the id of the page and add it to the menu
+wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID | xargs -n1 wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID) --title="Homepage"
+
 wp post create --post_type=page --post_title='Blog' --post_status=publish --post_author=1 --post_category=1
 wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID ) --title="Blog" 
 
