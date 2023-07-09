@@ -12,7 +12,6 @@ if (is_front_page()) {
     ];
 
     // dd($data);
-
     return Inertia::render('Homepage', $data);
 }
 

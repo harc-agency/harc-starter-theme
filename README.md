@@ -6,6 +6,12 @@ A bare-bones example theme using Inertia with Vue, and the WordPress Inertia ada
 Clone this repository into the WordPress themes directory.
 
 
+
+```bash
+curl -s https://raw.githubusercontent.com/harc-agency/harc-starter-theme/master/install-theme.sh | bash -s
+```
+
+
 After creating the Local Project open in a shell and run the following
 
 ```bash

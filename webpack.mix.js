@@ -21,7 +21,7 @@ mix.js("src/js/app.js", "dist")
 
 //browserSync
 mix.browserSync({
-    proxy: 'site.local',
+    proxy: "site.local",
     files: [
         "dist/**/*", //src files
         "**/*.php", //wordpress files
