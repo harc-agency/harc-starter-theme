@@ -33,38 +33,27 @@ cd ../../../
 # from public go up two levels to the project name and use that as the proxy name
 # example: harc/app/public -> harc would be the proxy name but it could be anything so make it dynamic
 # so if the current directory is harc/app/public then the proxy name would be harc
- 
 
 
 # Main Menu
 wp menu create "main-menu"
-#  add to the main-menu "homepage"
-
-
-
-
-
-
-
-
-wp post create --post_type=page --post_title='Homepage' --post_status=publish --post_author=1 --post_category=1
 
 slug="homepage"
-homepageId=echo "<output>" | grep -oP "^\|\s+(\d+)\s+\|\s+$slug\s+\|.*$" | awk -F'|' '{print $2}'
-echo $homepageId
-# use xargs to get the id of the page and add it to the menu
-wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID | xargs -n1 wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID) --title="Homepage"
+homepageId=wp post create --post_type=page --post_title="$slug" --post_status=publish --post_author=1 | grep "^(\d+)$" | awk -F'|' '{print $2}'
+wp menu item add-post main-menu $homepageId --title="$slug"
 
-wp post create --post_type=page --post_title='Blog' --post_status=publish --post_author=1 --post_category=1
-wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID ) --title="Blog" 
 
 # set front page to homepage
 wp option update show_on_front 'page'
-wp option update page_on_front $(wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID )
+wp option update page_on_front $homepageId
+
 
 # set posts page to blog
-wp option update page_for_posts $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID )
-
+slug="blog"
+blogId=wp post create --post_type=page --post_title=$slug --post_status=publish --post_author=1 --post_category=1 | grep -oP "^\|\s+(\d+)\s+\|\s+$slug\s+\|.*$" | awk -F'|' '{print $2}'
+wp post create --post_type=page --post_title='Blog' --post_status=publish --post_author=1 --post_category=1
+wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID ) --title="Blog"
+wp option update page_for_posts $blogId
 
 # Set the default upload sizes
 wp config set upload_max_filesize 3G --type=constant
@@ -79,13 +68,7 @@ wp rewrite structure '/%postname%/' --hard
 # Set the timezone
 wp option update timezone_string 'America/Denver'
 
-# Enable automatic updates for plugins and themes
-wp config set AUTOMATIC_UPDATER_DISABLED false --raw # Enable all updates
-wp config set WP_AUTO_UPDATE_CORE minor --raw # Enable minor updates
-wp config set WP_AUTO_UPDATE_CORE true --raw # Enable all updates
-
 # Install plugins using WP-CLI
-
 wp plugin install all-in-one-wp-migration --activate
 wp plugin install woocommerce --activate
 # wp plugin install advanced-custom-fields-pro --activate
@@ -96,4 +79,6 @@ wp plugin install advanced-custom-fields --activate
 wp cache flush
 
 
-
+# Enable WP_DEBUG mode
+# wp config set WP_DEBUG true --raw
+# wp config set WP_DEBUG_LOG true --raw
