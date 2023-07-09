@@ -44,6 +44,14 @@ wp menu item add-post main-menu $(wp post list --post_type=page --post_status=pu
 wp post create --post_type=page --post_title='Blog' --post_status=publish --post_author=1 --post_category=1
 wp menu item add-post main-menu $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID ) --title="Blog" 
 
+# set front page to homepage
+wp option update show_on_front 'page'
+wp option update page_on_front $(wp post list --post_type=page --post_status=publish --post_title='Homepage' --field=ID )
+
+# set posts page to blog
+wp option update page_for_posts $(wp post list --post_type=page --post_status=publish --post_title='Blog' --field=ID )
+
+
 # Set the default upload sizes
 wp config set upload_max_filesize 3G --type=constant
 wp config set post_max_size 3G --type=constant
@@ -73,6 +81,5 @@ wp plugin install advanced-custom-fields --activate
 # Clear WordPress cache (if using a caching plugin)
 wp cache flush
 
-# Restart web server (Nginx)
-service nginx restart
+
 
