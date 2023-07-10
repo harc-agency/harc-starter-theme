@@ -34,4 +34,13 @@ NOTE: Browsersync has some limitation. You get one link then then you will have 
  
 ### Index.php
 
-The index.php file is the main file for the theme. It is used to render the initial page, and then Vue takes over from there. The index.php file is also used to render the WordPress admin pages.
+```bash
+wp-content/themes/harc-starter-theme/index.php
+```
+
+Everything start from the index.php file. the flow goes as follows:
+  - index.php  
+  - app.php (bb_inject_inertia)
+  - app.js (Inertia) 
+    - src/Pages (Vue)
+     
