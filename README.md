@@ -24,15 +24,14 @@ npm run watch
 ```
 
 ### Configuration
-rename site.local which is in webpack.mix.js to your local site url. BrowserSync will proxy this url.
+if you want to use BrowserSync, in `webpack.mix.js` rename the `proxy` from `site.local` to what ever the projects name is. webpack.mix.js to your local site url. BrowserSync will proxy this url.
 
 ```bash
 proxy: site.local to proxy: nameofsite.local
 ``` 
+
+NOTE: Browsersync has some limitation. You get one link then then you will have to refresh the page, its a bug, but it works.
  
 ### Index.php
 
 The index.php file is the main file for the theme. It is used to render the initial page, and then Vue takes over from there. The index.php file is also used to render the WordPress admin pages.
-
-This will be the only file that you will need to edit to add new pages to the theme. You can add new routes to the `routes` array, and then create a new Vue component in the `src/Pages` directory.
-
