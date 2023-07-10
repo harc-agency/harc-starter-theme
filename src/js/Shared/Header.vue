@@ -6,7 +6,15 @@
   <nav>
     <ul>
       <li tabindex="0" v-for=" (link, index) in page.props.menu" :key="index">
-        <Link>{{ link.title }}</Link>
+        <!-- isCurrentUrl -->
+        <Link
+          :href="link.url"
+          :class="{
+            'text-primary': isCurrentUrl(link.url),
+            'text-gray-500': !isCurrentUrl(link.url),
+          }">
+          {{ link.title }}
+        </Link>
       </li>
     </ul>
 
