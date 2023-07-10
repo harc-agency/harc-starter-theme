@@ -121,7 +121,7 @@ else
 fi
 
 # check if homepage is in main-menu
-if ![wp menu list | grep -q 'Homepage']; then
+if ![wp menu item list main-menu | grep -q 'Homepage']; then
     echo "Homepage is not in main-menu"
     wp menu item add-post main-menu $homepageId --title="Homepage"
 else
@@ -129,7 +129,7 @@ else
 fi
 
 # check if blog is in main-menu
-if ![wp menu list | grep -q 'Blog']; then
+if ![wp menu item list main-menu | grep -q 'Blog']; then
     echo "Blog is not in main-menu"
     wp menu item add-post main-menu $blogId --title="Blog"
 else
