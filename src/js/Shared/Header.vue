@@ -1,23 +1,20 @@
 <template>
 <header style="display: flex; align-items: center; justify-content: space-between">
   <Link href="/">
-    <h1>{{ props.site.name }}</h1>
+    <h1>{{ page.props.site.name }}</h1>
   </Link>
-  <nav>
-    <ul>
-      <li tabindex="0" v-for=" (link, index) in page.props.menu" :key="index">
-        <!-- isCurrentUrl -->
-        <Link
-          :href="link.url"
-          :class="{
-            'text-primary': isCurrentUrl(link.url),
-            'text-gray-500': !isCurrentUrl(link.url),
-          }">
-          {{ link.title }}
-        </Link>
-      </li>
-    </ul>
 
+  <nav>
+    <Link
+      v-for=" (link, index) in page.props.menu" :key="index"
+      :href="link.url"
+      class="ml-4"
+      :class="{
+        'text-primary': isCurrentUrl(link.url),
+        'text-gray-500': !isCurrentUrl(link.url)
+      }">
+      {{ link.title }}
+    </Link>
     <Link href="/this-page-does-not-exist">404 Page</Link>
     <Link style="margin-left: 1rem" href="/sample-page">Sample Page</Link>
   </nav>

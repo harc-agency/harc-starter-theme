@@ -91,7 +91,7 @@ if wp post list --post_type=page | grep -q 'Homepage'; then
     echo "Homepage exists"
 else
     echo "Homepage does not exist"
-    homepageId=wp post create --post_type=page --post_status=publish --post_title='Homepage' --porcelain
+    homepageId=$(wp post create --post_type=page --post_status=publish --post_title='Homepage' --porcelain)
 fi
 
 # check if blog exists
@@ -99,7 +99,7 @@ if wp post list --post_type=page | grep -q 'Blog'; then
     echo "Blog exists"
 else
     echo "Blog does not exist"
-    blogId=wp post create --post_type=page --post_status=publish --post_title='Blog' --porcelain
+    blogId=$(wp post create --post_type=page --post_status=publish --post_title='Blog' --porcelain)
 fi
 
 # set front page to homepage
@@ -123,7 +123,7 @@ fi
 # check if homepage is in main-menu
 if ![wp menu list | grep -q 'Homepage']; then
     echo "Homepage is not in main-menu"
-    wp menu item add-post main-menu $homepage --title="Homepage"
+    wp menu item add-post main-menu $homepageId --title="Homepage"
 else
     echo "Homepage is in main-menu"
 fi
@@ -131,7 +131,7 @@ fi
 # check if blog is in main-menu
 if ![wp menu list | grep -q 'Blog']; then
     echo "Blog is not in main-menu"
-    wp menu item add-post main-menu $blog --title="Blog"
+    wp menu item add-post main-menu $blogId --title="Blog"
 else
     echo "Blog is in main-menu"
 fi

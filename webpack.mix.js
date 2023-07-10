@@ -27,7 +27,7 @@ mix.browserSync({
         "**/*.php", //wordpress files
         "src/css/*.css"
     ],
-    open: true, // Don't automatically open the browser after running Browsersync
+    open: false, // Don't automatically open the browser after running Browsersync
     notify: false, // Don't show any notifications in the browser.
     ghostMode: false // Disable syncing multiple tabs
 })
