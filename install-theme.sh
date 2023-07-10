@@ -154,5 +154,6 @@ wp option update timezone_string 'America/Denver'
 wp cache flush
 
 # Enable WP_DEBUG mode
-wp config set WP_DEBUG true --raw
-wp config set WP_DEBUG_LOG true --raw
+# wp config set WP_DEBUG true --raw
+wp config set WP_DEBUG false --raw
+wp config set WP_DEBUG_LOG false --raw
