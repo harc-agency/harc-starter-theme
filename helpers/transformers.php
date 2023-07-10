@@ -31,6 +31,10 @@ if (!function_exists('transform_wp_get_nav_menu_items')) {
         $menu_items = wp_get_nav_menu_items($menu_items);
         // dd($menu_items);
 
+        if (!$menu_items) {
+            return [];
+        }
+
         // Create an empty array to store the transformed data
         $transformed_data = [];
 
