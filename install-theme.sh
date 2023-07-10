@@ -117,7 +117,7 @@ if wp menu list | grep -q 'main-menu'; then
 else
     echo "The 'main-menu' was not found."
     wp menu create "main-menu"
-    wp menu location assign main-menu primary
+    wp menu location assign main-menu
 fi
 
 # check if homepage is in main-menu
