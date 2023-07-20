@@ -1,9 +1,15 @@
 #!/bin/bash
+if ! command -v wp &> /dev/null
+then
+    echo "`wp` command could not be found. Please install it before running this script."
+    exit
+fi
 
-pwd
+# Define common paths as variables
+theme_dir="wp-content/themes/harc-starter-theme"
 
 # Check if the Harc starter theme is installed
-if [ ! -d "wp-content/themes/harc-starter-theme" ]; then
+if [ ! -d "${theme_dir}" ]; then
     echo "Harc starter theme is not installed"
     echo "Installing Harc starter theme"
 
@@ -23,10 +29,10 @@ fi
 
 
 # check if vendor folder exists
-if [ ! -d "wp-content/themes/harc-starter-theme/vendor" ]; then
+if [ ! -d "${theme_dir}/vendor" ]; then
     echo "vendor folder does not exist"
     echo "Installing composer dependencies"
-    cd wp-content/themes/harc-starter-theme
+    cd ${theme_dir}
     composer install
     cd ../../../
 else
@@ -36,10 +42,10 @@ fi
 
 
 # check if node_modules folder exists
-if [ ! -d "wp-content/themes/harc-starter-theme/node_modules" ]; then
+if [ ! -d "${theme_dir}/node_modules" ]; then
     echo "node_modules folder does not exist"
     echo "Installing npm dependencies"
-    cd wp-content/themes/harc-starter-theme
+    cd ${theme_dir}
     npm install
     npm run dev
     cd ../../../
@@ -48,11 +54,11 @@ else
 fi
 
 # Install Harc starter theme .env file
-if [ -f "wp-content/themes/harc-starter-theme/.env" ]; then
+if [ -f "${theme_dir}/.env" ]; then
     echo "Harc starter theme .env file is installed"
 else
     echo "Installing Harc starter theme .env file"
-    cp wp-content/themes/harc-starter-theme/.env.example wp-content/themes/harc-starter-theme/.env
+    cp ${theme_dir}/.env.example ${theme_dir}/.env
 fi
 
 # check if acf plugin is installed
@@ -116,14 +122,14 @@ if wp menu list | grep -q 'main-menu'; then
     echo "The 'main-menu' was found"
 else
     echo "The 'main-menu' was not found."
-    wp menu create "main-menu"
+    $menuId=$(wp menu create "main-menu" --porcelain)
     wp menu location assign main-menu
 fi
 
 # check if homepage is in main-menu
-if ![wp menu item list main-menu | grep -q 'Homepage']; then
+if ![wp menu item list "main-menu" | grep -q 'Homepage']; then
     echo "Homepage is not in main-menu"
-    wp menu item add-post main-menu $homepageId --title="Homepage"
+    wp menu item add-post $menuId $homepageId --title="Homepage"
 else
     echo "Homepage is in main-menu"
 fi
