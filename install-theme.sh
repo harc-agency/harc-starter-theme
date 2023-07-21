@@ -80,6 +80,15 @@ else
     echo "woocommerce plugin is already installed"
 fi
 
+# check if woocommerce plugin is installed
+if [ ! -d "wp-content/plugins/wp-graphql" ]; then
+    echo "wp-graphql plugin is not installed"
+    echo "Installing woocommerce plugin"
+    wp plugin install wp-graphql --activate
+else
+    echo "wp-graphql plugin is already installed"
+fi
+
 # all-in-one-wp-migration
 if [ ! -d "wp-content/plugins/all-in-one-wp-migration" ]; then
     echo "all-in-one-wp-migration plugin is not installed"
